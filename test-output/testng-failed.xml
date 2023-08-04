@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Failed suite [NopCommerce - UI Automation]" guice-stage="DEVELOPMENT">
+  <parameter name="url" value="https://demo.nopcommerce.com/"/>
+  <test thread-count="5" name="Run on Chrome(failed)">
+    <parameter name="browser" value="Chrome"/>
+    <classes>
+      <class name="com.nopcommerce.user.Level_05_Page_Factory">
+        <methods>
+          <include name="Register_05_Success"/>
+          <include name="beforeClass"/>
+          <include name="afterClass"/>
+        </methods>
+      </class> <!-- com.nopcommerce.user.Level_05_Page_Factory -->
+    </classes>
+  </test> <!-- Run on Chrome(failed) -->
+  <test thread-count="5" name="Run on Firefox(failed)">
+    <parameter name="browser" value="Firefox"/>
+    <classes>
+      <class name="com.nopcommerce.user.Level_05_Page_Factory">
+        <methods>
+          <include name="Register_05_Success"/>
+          <include name="beforeClass"/>
+          <include name="afterClass"/>
+        </methods>
+      </class> <!-- com.nopcommerce.user.Level_05_Page_Factory -->
+    </classes>
+  </test> <!-- Run on Firefox(failed) -->
+  <test thread-count="5" name="Run on Edge(failed)">
+    <parameter name="browser" value="Edge"/>
+    <classes>
+      <class name="com.nopcommerce.user.Level_05_Page_Factory">
+        <methods>
+          <include name="Register_05_Success"/>
+          <include name="beforeClass"/>
+          <include name="afterClass"/>
+        </methods>
+      </class> <!-- com.nopcommerce.user.Level_05_Page_Factory -->
+    </classes>
+  </test> <!-- Run on Edge(failed) -->
+</suite> <!-- Failed suite [NopCommerce - UI Automation] -->
