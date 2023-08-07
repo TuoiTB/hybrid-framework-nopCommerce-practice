@@ -3,11 +3,11 @@ package pageObjects;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import commons.BasePage;
+import commons.BasePagePractice;
 import pageUI.HomePageUI;
 import pageUI.RegisterPageUI;
 
-public class HomePageObject extends BasePage{
+public class HomePageObject extends BasePagePractice{
 	//Contains actions as functions of that page. Ex: Click/ Select/ Verify/ getText/... 
 	private WebDriver driver;
 	WebDriverWait explicitWait;

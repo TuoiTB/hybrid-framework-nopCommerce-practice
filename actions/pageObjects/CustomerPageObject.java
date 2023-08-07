@@ -2,10 +2,10 @@ package pageObjects;
 
 import org.openqa.selenium.WebDriver;
 
-import commons.BasePage;
+import commons.BasePagePractice;
 import pageUI.CustomerPageUI;
 
-public class CustomerPageObject extends BasePage{
+public class CustomerPageObject extends BasePagePractice{
 
 	private WebDriver driver;
 	public CustomerPageObject(WebDriver driver) {

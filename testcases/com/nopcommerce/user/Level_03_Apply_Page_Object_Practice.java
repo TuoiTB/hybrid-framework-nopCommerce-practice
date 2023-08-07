@@ -1,59 +1,63 @@
 package com.nopcommerce.user;
 
+import java.time.Duration;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
-import commons.BaseTest;
-import pageFactory.CustomerPageObject_pageFactory;
-import pageFactory.HomePageObject_pageFactory;
-import pageFactory.LoginPageObject_pageFactory;
-import pageFactory.RegisterPageObject_pageFactory;
+import commons.BasePagePractice;
+import pageObjects.CustomerPageObject;
+import pageObjects.HomePageObject;
+import pageObjects.LoginPageObject;
+import pageObjects.RegisterPageObject;
 
-
-public class Level_05_Page_Factory extends BaseTest {
+public class Level_03_Apply_Page_Object_Practice{
 
 	private WebDriver driver;
 	private String projectPath = System.getProperty("user.dir");
 	
-	private HomePageObject_pageFactory homePage;
-	private RegisterPageObject_pageFactory registerPage;
-	private LoginPageObject_pageFactory loginPage;
-	private CustomerPageObject_pageFactory customerPage;
+	private HomePageObject homePage;
+	private RegisterPageObject registerPage;
+	private LoginPageObject loginPage;
+	private CustomerPageObject customerPage;
 	
 	
-	private String firstName = "John";;
-	private String lastName = "Wick";;
+	private String firstName;
+	private String lastName;
 	Random rand = new Random();
 	private String emailAddress = "automation" + rand.nextInt(999) + "@gmail.vn";
-	private String password = "auto@123";;
+	private String password;
 	
 	
-	@Parameters("browser")
+
 	@BeforeClass
-	public void beforeClass(String browserName) {
-		driver = getBrowserDriver(browserName);
+	public void beforeClass() {
+		System.setProperty("webdriver.gecko.driver", projectPath + "\\browserDrivers\\geckodriver.exe");
+		driver = new FirefoxDriver();
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
+	
+		firstName = "John";
+		lastName = "Wick";
+		password = "auto@123";
+		driver.get("https://demo.nopcommerce.com/");
 		
 	}
 	@Test
 	public void Register_01_Empty_Data() {
 		
-		homePage = new HomePageObject_pageFactory(driver);
+		homePage = new HomePageObject(driver);
 		
 		homePage.clickToRegisterLink();
 		
 		//Khởi tạo registerPage lên để chạy tiếp flow
-		registerPage = new RegisterPageObject_pageFactory(driver);
+		registerPage = new RegisterPageObject(driver);
 		
 		registerPage.clickToRegisterButton();
 
@@ -74,11 +78,11 @@ public class Level_05_Page_Factory extends BaseTest {
 	public void Register_02_Invalid_Email() {
 		registerPage.clickToHomePageLogo();
 		
-		homePage = new HomePageObject_pageFactory(driver);
+		homePage = new HomePageObject(driver);
 		
 		homePage.clickToRegisterLink();
 		
-		registerPage = new RegisterPageObject_pageFactory(driver);
+		registerPage = new RegisterPageObject(driver);
 		
 		registerPage.enterToFirstNameTextbox(firstName);
 		registerPage.enterToLastNameTextbox(lastName);
@@ -96,11 +100,11 @@ public class Level_05_Page_Factory extends BaseTest {
 	public void Register_03_Invalid_Password() {
 		registerPage.clickToHomePageLogo();
 		
-		homePage = new HomePageObject_pageFactory(driver);
+		homePage = new HomePageObject(driver);
 		
 		homePage.clickToRegisterLink();
 		
-		registerPage = new RegisterPageObject_pageFactory(driver);
+		registerPage = new RegisterPageObject(driver);
 		
 		registerPage.enterToFirstNameTextbox(firstName);
 		registerPage.enterToLastNameTextbox(lastName);
@@ -117,11 +121,11 @@ public class Level_05_Page_Factory extends BaseTest {
 	public void Register_04_Incorrect_Confirm_Password() {
 		registerPage.clickToHomePageLogo();
 		
-		homePage = new HomePageObject_pageFactory(driver);
+		homePage = new HomePageObject(driver);
 		
 		homePage.clickToRegisterLink();
 		
-		registerPage = new RegisterPageObject_pageFactory(driver);
+		registerPage = new RegisterPageObject(driver);
 		
 		registerPage.enterToFirstNameTextbox(firstName);
 		registerPage.enterToLastNameTextbox(lastName);
@@ -138,11 +142,11 @@ public class Level_05_Page_Factory extends BaseTest {
 	public void Register_05_Success() {
 		registerPage.clickToHomePageLogo();
 		
-		homePage = new HomePageObject_pageFactory(driver);
+		homePage = new HomePageObject(driver);
 		
 		homePage.clickToRegisterLink();
 		
-		registerPage = new RegisterPageObject_pageFactory(driver);
+		registerPage = new RegisterPageObject(driver);
 		
 		registerPage.enterToFirstNameTextbox(firstName);
 		registerPage.enterToLastNameTextbox(lastName);
@@ -156,20 +160,20 @@ public class Level_05_Page_Factory extends BaseTest {
 
 		registerPage.clickToHomePageLogo();
 		
-		homePage = new HomePageObject_pageFactory(driver);
+		homePage = new HomePageObject(driver);
 		
 		homePage.clickToLoginLink();
 		
-		loginPage = new LoginPageObject_pageFactory(driver);
+		loginPage = new LoginPageObject(driver);
 		loginPage.enterToEmailTextbox(emailAddress);
 		loginPage.enterToPasswordTextbox(password);
 		loginPage.clickToLoginButton();
 		
-		homePage = new HomePageObject_pageFactory(driver);
+		homePage = new HomePageObject(driver);
 		
 		homePage.clickToMyAccountLink();
 		
-		customerPage = new CustomerPageObject_pageFactory(driver);
+		customerPage = new CustomerPageObject(driver);
 		
 		Assert.assertEquals(customerPage.getFirstNameAttributeValue(),firstName);
 		Assert.assertEquals(customerPage.getLastNameAttributeValue(),lastName);
@@ -179,7 +183,7 @@ public class Level_05_Page_Factory extends BaseTest {
 
 	@AfterClass
 	public void afterClass() {
-		quitBrowserDriver();
+		driver.quit();
 	}
 
 }

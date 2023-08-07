@@ -12,12 +12,12 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 //import io.github.bonigarcia.wdm.WebDriverManager;
 
 
-public class BaseTest {
+public class BaseTestPractice {
 	//Contains common function for all testcases
 	//private String projectPath = System.getProperty("user.dir");
 	private WebDriver driver;
 	protected WebDriver getBrowserDriver (String browserName) {
-		BrowserList browserList = BrowserList.valueOf(browserName.toUpperCase());
+		BrowserListPractice browserList = BrowserListPractice.valueOf(browserName.toUpperCase());
 		switch (browserList) {
 		
 		case CHROME: 

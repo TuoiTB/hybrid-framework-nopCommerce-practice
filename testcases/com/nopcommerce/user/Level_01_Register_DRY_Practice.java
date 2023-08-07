@@ -1,8 +1,7 @@
 package com.nopcommerce.user;
 
+import java.time.Duration;
 import java.util.Random;
-import java.util.concurrent.TimeUnit;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -11,7 +10,7 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-public class Level_01_Register_DRY {
+public class Level_01_Register_DRY_Practice {
 	// Requirement:
 	// Code to can run ok
 	// No need optimize
@@ -30,7 +29,7 @@ public class Level_01_Register_DRY {
 		System.setProperty("webdriver.gecko.driver", projectPath + "\\browserDrivers\\geckodriver.exe");
 		driver = new FirefoxDriver();
 
-		driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
 		
 		firstName = "John";
 		lastName = "Wick";

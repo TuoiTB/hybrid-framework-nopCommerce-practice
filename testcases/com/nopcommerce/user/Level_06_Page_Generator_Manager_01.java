@@ -14,14 +14,14 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
-import commons.BasePage;
-import commons.BaseTest;
+import commons.BasePagePractice;
+import commons.BaseTestPractice;
 import pageObjects.CustomerPageObject;
 import pageObjects.HomePageObject;
 import pageObjects.LoginPageObject;
 import pageObjects.RegisterPageObject;
 
-public class Level_06_Page_Generator_Manager_01 extends BaseTest {
+public class Level_06_Page_Generator_Manager_01 extends BaseTestPractice {
 
 	private WebDriver driver;
 	private String projectPath = System.getProperty("user.dir");

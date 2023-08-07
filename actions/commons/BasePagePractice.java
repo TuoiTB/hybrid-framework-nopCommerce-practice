@@ -1,4 +1,4 @@
-package pageFactory;
+package commons;
 
 import java.time.Duration;
 import java.util.List;
@@ -17,9 +17,9 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class BasePageFactory {
-	public static BasePageFactory getBasePage() {
-		return new BasePageFactory();
+public class BasePagePractice {
+	public static BasePagePractice getBasePage() {
+		return new BasePagePractice();
 	}
 	// contains common function for layer page object
 	// Viết các hàm cho Web Browser
@@ -117,41 +117,6 @@ public class BasePageFactory {
 		}
 	}
 	
-	//------------Các hàm tương tác với element đối với level pageFactory
-	
-	public void clickToElement(WebDriver driver, WebElement element) {
-		element.click();
-	}
-	
-	public void waitForElementVisible(WebDriver driver, WebElement element) {
-		new WebDriverWait(driver, Duration.ofSeconds(15)).until(ExpectedConditions.visibilityOf(element));
-	}
-	
-	
-	public void waitForElementClickable(WebDriver driver, WebElement element) {
-		new WebDriverWait(driver, Duration.ofSeconds(15)).until(ExpectedConditions.elementToBeClickable(element));
-	}
-	
-
-	public String getElementAttribute(WebDriver driver, WebElement element, String attributeName) {
-		return element.getAttribute(attributeName);
-	}
-	
-	public String getElementText(WebDriver driver, WebElement element) {
-		return element.getText();
-	}
-	
-	public void sendkeyToElement(WebDriver driver, WebElement element, String value) {
-		//driver.findElement(By.xpath(xpathExpression)).clear();
-		//driver.findElement(By.xpath(xpathExpression)).sendKeys(value);
-		element.clear();
-		element.sendKeys(value);
-	}
-	
-	
-	
-	
-	//------------
 	
 	
 	
@@ -173,6 +138,12 @@ public class BasePageFactory {
 		getElement(driver, xpathExpression).click();
 	}
 	
+	public void sendkeyToElement(WebDriver driver, String xpathExpression, String value) {
+		//driver.findElement(By.xpath(xpathExpression)).clear();
+		//driver.findElement(By.xpath(xpathExpression)).sendKeys(value);
+		getElement(driver, xpathExpression).clear();
+		getElement(driver, xpathExpression).sendKeys(value);
+	}
 	
 	
 	
@@ -212,9 +183,13 @@ public class BasePageFactory {
 	
 	
 	
+	public String getElementText(WebDriver driver, String xpathExpression) {
+		return getElement(driver, xpathExpression).getText();
+	}
 	
-	
-	
+	public String getElementAttribute(WebDriver driver, String xpathExpression, String attributeName) {
+		return getElement(driver, xpathExpression).getAttribute(attributeName);
+	}
 	
 	public String getElementCssValue(WebDriver driver, String xpathExpression, String propertyName) {
 		return getElement(driver, xpathExpression).getCssValue(propertyName);
@@ -355,9 +330,16 @@ public class BasePageFactory {
 	
 	
 	
+	public void waitForElementVisible(WebDriver driver, String xpathExpression) {
+		new WebDriverWait(driver, Duration.ofSeconds(15)).until(ExpectedConditions.visibilityOfElementLocated(getByXpath(xpathExpression)));
+	}
 	
 	public void waitForListElementVisible(WebDriver driver, String xpathExpression) {
 		new WebDriverWait(driver, Duration.ofSeconds(15)).until(ExpectedConditions.visibilityOfAllElementsLocatedBy(getByXpath(xpathExpression)));
+	}
+	
+	public void waitForElementClickable(WebDriver driver, String xpathExpression) {
+		new WebDriverWait(driver, Duration.ofSeconds(15)).until(ExpectedConditions.elementToBeClickable(getByXpath(xpathExpression)));
 	}
 	
 	public void waitForElementInvisible(WebDriver driver, String xpathExpression) {

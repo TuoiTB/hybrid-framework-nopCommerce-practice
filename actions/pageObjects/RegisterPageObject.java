@@ -4,10 +4,10 @@ import java.util.Random;
 
 import org.openqa.selenium.WebDriver;
 
-import commons.BasePage;
+import commons.BasePagePractice;
 import pageUI.RegisterPageUI;
 
-public class RegisterPageObject extends BasePage {
+public class RegisterPageObject extends BasePagePractice {
 	private WebDriver driver;
 	
 	public RegisterPageObject(WebDriver driver) {

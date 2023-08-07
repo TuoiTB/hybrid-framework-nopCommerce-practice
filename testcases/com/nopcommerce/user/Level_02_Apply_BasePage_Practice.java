@@ -1,8 +1,7 @@
 package com.nopcommerce.user;
 
+import java.time.Duration;
 import java.util.Random;
-import java.util.concurrent.TimeUnit;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -11,10 +10,13 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import commons.BasePage;
+import commons.BasePagePractice;
 
-public class Level_02_Apply_BasePage_03_Inheritance extends BasePage {
-
+public class Level_02_Apply_BasePage_Practice extends BasePagePractice{
+	// Requirement:
+	// Code to can run ok
+	// No need optimize
+	// Can repeat many same steps
 	WebDriver driver;
 	String projectPath = System.getProperty("user.dir");
 	String firstName;
@@ -23,28 +25,27 @@ public class Level_02_Apply_BasePage_03_Inheritance extends BasePage {
 	String emailAddress = "automation" + rand.nextInt(999) + "@gmail.vn";
 	String password;
 
+	
 	@BeforeClass
 	public void beforeClass() {
 		System.setProperty("webdriver.gecko.driver", projectPath + "\\browserDrivers\\geckodriver.exe");
 		driver = new FirefoxDriver();
-		driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
+
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
+		
 		firstName = "John";
 		lastName = "Wick";
 		password = "auto@123";
-		
 	}
+
 	@Test
 	public void Register_01_Empty_Data() {
-		//driver.get("https://demo.nopcommerce.com/");
 		openUrl(driver, "https://demo.nopcommerce.com/");
 
-		//driver.findElement(By.cssSelector("a.ico-register")).click();
 		clickToElement(driver, "//a[@class='ico-register']");
 
-		//driver.findElement(By.cssSelector("button#register-button")).click();
 		clickToElement(driver, "//button[@id='register-button']");
 
-		//getText: basePage.getElementText(driver, "//span[@id='FirstName-error']");
 		Assert.assertTrue(
 				getElementText(driver, "//span[@id='FirstName-error']").equals("First name is required."));
 		Assert.assertTrue(
@@ -59,10 +60,8 @@ public class Level_02_Apply_BasePage_03_Inheritance extends BasePage {
 
 	@Test
 	public void Register_02_Invalid_Email() {
-		//driver.get("https://demo.nopcommerce.com/");
 		openUrl(driver, "https://demo.nopcommerce.com/");
-		
-		//driver.findElement(By.cssSelector("a.ico-register")).click();
+
 		clickToElement(driver, "//a[@class='ico-register']");
 		
 		sendkeyToElement(driver, "//input[@id='FirstName']", firstName);
@@ -71,11 +70,9 @@ public class Level_02_Apply_BasePage_03_Inheritance extends BasePage {
 		sendkeyToElement(driver, "//input[@id='Password']", password);
 		sendkeyToElement(driver, "//input[@id='ConfirmPassword']", password);
 
-		//driver.findElement(By.cssSelector("button#register-button")).click();
 		clickToElement(driver, "//button[@id='register-button']");
 
 		Assert.assertTrue(getElementText(driver, "//span[@id='Email-error']").equals("Wrong email"));
-		
 	}
 
 	@Test
@@ -84,11 +81,11 @@ public class Level_02_Apply_BasePage_03_Inheritance extends BasePage {
 		
 		clickToElement(driver, "//a[@class='ico-register']");
 		
-		sendkeyToElement(driver, "//input[@id='FirstName']", firstName);
-		sendkeyToElement(driver, "//input[@id='LastName']", lastName);
-		sendkeyToElement(driver, "//input[@id='Email']", emailAddress);
-		sendkeyToElement(driver, "//input[@id='Password']", "12");
-		sendkeyToElement(driver, "//input[@id='ConfirmPassword']", "12");
+		sendkeyToElement(driver, "//input[@id='FirstName']",firstName );
+		sendkeyToElement(driver, "//input[@id='LastName']",lastName );
+		sendkeyToElement(driver, "//input[@id='Email']",emailAddress);
+		sendkeyToElement(driver, "//input[@id='Password']","12" );
+		sendkeyToElement(driver, "//input[@id='ConfirmPassword']","12" );
 		
 		clickToElement(driver, "//button[@id='register-button']");
 		
@@ -109,7 +106,6 @@ public class Level_02_Apply_BasePage_03_Inheritance extends BasePage {
 		
 		clickToElement(driver, "//button[@id='register-button']");
 		
-		
 		Assert.assertTrue(getElementText(driver, "//span[@id='ConfirmPassword-error']").equals("The password and confirmation password do not match."));
 	}
 
@@ -119,11 +115,11 @@ public class Level_02_Apply_BasePage_03_Inheritance extends BasePage {
 
 		clickToElement(driver, "//a[@class='ico-register']");
 		
-		sendkeyToElement(driver, "//input[@id='FirstName']", firstName);
-		sendkeyToElement(driver, "//input[@id='LastName']", lastName);
-		sendkeyToElement(driver, "//input[@id='Email']", emailAddress);
-		sendkeyToElement(driver, "//input[@id='Password']", password);
-		sendkeyToElement(driver, "//input[@id='ConfirmPassword']", password);
+		sendkeyToElement(driver, "//input[@id='FirstName']",firstName );
+		sendkeyToElement(driver, "//input[@id='LastName']",lastName );
+		sendkeyToElement(driver, "//input[@id='Email']",emailAddress );
+		sendkeyToElement(driver, "//input[@id='Password']",password );
+		sendkeyToElement(driver, "//input[@id='ConfirmPassword']",password );
 		
 		clickToElement(driver, "//button[@id='register-button']");
 		
